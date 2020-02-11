@@ -1,0 +1,101 @@
+---
+title: "Clark-Izzi-ADA-homework-1"
+output: html_document
+---
+
+Challenge 1:
+
+```{r}
+quote <- "There is grandeur in this view of life, with its several powers, having been originally breathed by the Creator into a few forms or into one; and that, whilst this planet has gone circling on according to the fixed law of gravity, from so simple a beginning endless forms most beautiful and most wonderful have been, and are being evolved."
+
+split_quote <- strsplit(quote, " ")
+
+every_fourth <- split_quote[[1]][seq(from = 4, to = 60, by = 4)]
+print(every_fourth)
+every_fourth <- sort(every_fourth, decreasing = TRUE)
+print(every_fourth)
+```
+
+Challenge 2:
+
+```{r}
+m1 <- matrix(
+  data = seq(from = 1, to = 159, by = 2),
+  nrow = 8,
+  ncol = 10,
+  byrow = FALSE
+)
+print(m1[5,2])
+print(m1[c(5:7),])
+m2 <- m1[c(3:6),c(4:9)]
+class(m2)
+mode(m2)
+```
+The class of variable m2 is a matrix. Its mode is numeric.
+
+Challenge 3:
+```{r}
+a <- array(data = 400:1, dim = c(5, 5, 4, 4))
+a[1, 1, 1, 2]
+a[2, 3, 2, ]
+a[1:5, 1:5, 3, 3]
+```
+
+Challenge 4:
+
+1) Define superfamilies as character vectors
+
+```{r}
+Superfamily_Lorisoidea <- c("Lorisidae", "Galagidae")
+Superfamily_Lemuroidea <- c("Cheirogaleidae", "Lepilemuridae", "Indriidae", "Lemuridae", "Daubentoniidae")
+Superfamily_Tarsioidea <- c("Tarsiidae")
+Superfamily_Ceboidea <- c("Cebidae", "Atelidae", "Pitheciidae")
+Superfamily_Hominoidea <- c("Hylobatidae", "Hominidae")
+Superfamily_Cercopithecoidea <- c("Cercopithecidae")
+```
+
+2) Define Infraorders and Parvorders as lists of Superfamilies, name items accordingly
+```{r}
+Infraorder_Lorisiformes <- list(Superfamily_Lorisoidea)
+names(Infraorder_Lorisiformes) <- c("Superfamily: Lorisoidea")
+Infraorder_Lemuriformes <- list(Superfamily_Lemuroidea)
+names(Infraorder_Lemuriformes) <- c("Superfamily: Lemuroidea")
+Infraorder_Tarsiiformes <- list(Superfamily_Tarsioidea)
+names(Infraorder_Tarsiiformes) <- c("Superfamily: Tarsioidea")
+Parvorder_Platyrrhini <- list(Superfamily_Ceboidea)
+names(Parvorder_Platyrrhini) <- c("Superfamily: Ceboidea")
+Parvorder_Catarrhini <- list(Superfamily_Hominoidea, Superfamily_Cercopithecoidea)
+names(Parvorder_Catarrhini) <- c("Superfamily: Hominoidea", "Superfamily: Cercopithecoidea")
+Infraorder_Simiiformes <- list(Parvorder_Platyrrhini, Parvorder_Catarrhini)
+names(Infraorder_Simiiformes) <- c("Parvorder: Platyrrhini", "Parvorder: Catarrhini")
+```
+
+3) Define Suborders as lists of Infraorders and Parvorders
+```{r}
+Suborder_Strepsirhini <- list(Infraorder_Lorisiformes, Infraorder_Lemuriformes)
+names(Suborder_Strepsirhini) <- c("Infraorder: Lorisiformes", "Infraorder: Lemuriformes")
+Suborder_Haplorhini <- list(Infraorder_Tarsiiformes, Infraorder_Simiiformes)
+names(Suborder_Haplorhini) <- c("Infraorder: Tarsiiformes", "Infraoder: Simiiformes")
+```
+
+4) Define Order Primates as list of Suborders
+```{r}
+Order_Primates <- list(Suborder_Strepsirhini, Suborder_Haplorhini)
+names(Order_Primates) <- c("Suborder: Strepsirhini", "Suborder: Haplorhini")
+```
+
+5) Create new variable for new world monkeys using double bracket notation. Class and mode are both list.
+```{r}
+nwm <- Order_Primates[[2]][[2]][1]
+class(nwm)
+mode(nwm)
+```
+
+6) Extract tarsiers using $
+```{r}
+Order_Primates$`Suborder: Haplorhini`$`Infraorder: Tarsiiformes`$`Superfamily: Tarsioidea`
+```
+
+
+
+
